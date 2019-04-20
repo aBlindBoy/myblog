@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文章 - 博客管理系统</title>
+<link rel="stylesheet" type="text/css"
+	href="/admin/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/admin/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/admin/css/font-awesome.min.css">
+<link rel="apple-touch-icon-precomposed"
+	href="/admin/images/icon/icon.png">
+<link rel="shortcut icon" href="/admin/images/icon/favicon.ico">
+<script src="/admin/js/jquery-2.1.4.min.js"></script>
+
+
+</head>
+<body class="user-select" style="margin: 0px; padding: 0px;">
+	<div>
+		<ul class="breadcrumb" style="margin: 0px;">
+			<li>留言管理</li>
+			<li>留言查询</li>
+		</ul>
+	</div>
+	<form action="" method="post" class="form-inline">
+		<div class="row alert alert-info">
+		<!-- 	<div class="form-group">
+				<input type="text" name="messageName" class="form-control" placeholder="请输入姓名" />
+				<input type="submit" value="查询" class="btn btn-info " />
+
+
+			</div> -->
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>姓名</th>
+						<th>留言内容</th>
+						<th>留言日期</th>
+						<th>是否显示</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list (msgList)! as msg>
+					<tr>
+
+						<th>${(msg.messageId)!}</th>
+						<th>${(msg.messageName)!}</th>
+						<th>${(msg.messageContent)!}</th>
+						<th>${(msg.messageTime?string('yyyy-MM-dd HH:mm:ss'))!}</th>
+						<th><#if (msg.messageMark)! == "1"> 是
+							<#else >  否</#if>
+						</th>
+						<th><a href="/back/message/update.html?messageId=${(msg.messageId)!}&messageMark=1" 
+							style="color: green" >显示</a>
+							<a href="/back/message/update.html?messageId=${(msg.messageId)!}&messageMark=-1" style="color: red">不显示</a></th>
+						</#list>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</form>
+	<script src="/admin/js/bootstrap.min.js"></script>
+	<script src="/admin/js/admin-scripts.js"></script>
+<!-- 
+	<script type="text/javascript">
+		
+			
+			function show(msgId){
+			 $.ajax({
+				url: "/back/message/show",
+				data:{
+					msgId:msgId
+					
+				},
+				type:"POST",
+				datatype:"JSON",
+				success:function(result){
+			
+					$("#fou").text(result.show);
+				}
+			}) 
+			}
+			
+			function blank(msgId){
+				alert(msgId);
+			 $.ajax({
+				url: "/back/message/blank",
+				data:{
+					msgId:msgId
+					
+				},
+				type:"POST",
+				datatype:"JSON",
+				success:function(result){
+			
+					$("#shi''+msgId+''").text(result.blank);
+				}
+			}) 
+			}
+			
+	
+	</script> -->
+</body>
+</html>

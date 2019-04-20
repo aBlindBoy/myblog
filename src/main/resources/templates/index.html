@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/front/css/base.css" rel="stylesheet">
+<link href="/front/css/index.css" rel="stylesheet">
+
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+
+<script type="text/javascript" src="/admin/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap-suggest.min.js"></script>
+<!-- <script type="text/javascript" src="/admin/js/demo.js"></script> -->
+<script src="//cdn.bootcss.com/tether/1.2.0/js/tether.min.js"></script>
+
+<script type="text/javascript">
+	
+// 	(function fun(){
+// 		var ver=$("input#baidu").bsSuggest("version");
+// 		var e=$("input#baidu").bsSuggest("enable");
+		
+// 		console.log(ver);
+// 		console.log(e);
+// 	})();
+
+	
+// 	$("#baidu").bsSuggest({
+// 		url : "/front/searchSuggest?keyword=mybatis",
+// 		emptyTip : '未检索到匹配的数据',
+// 	}).on('onDataRequestSuccess', function(e, result) {
+// 		console.log('onDataRequestSuccess:', result);
+// 	}).on('onSetSelectValue',
+// 			function(e, selectedData, selectedRawData) {
+// 				console.log('onSetSelectValue:', e.target.value, selectedData,
+// 						electedRawData);
+// 			}).on('onUnsetSelectValue', function() {
+// 		console.log(66666);
+// 		console.log('onUnsetSelectValue');
+// 	}).on('onShowDropdown', function(e, data) {
+// 		console.log('onShowDropdown', e.target.value, data);
+// 	}).on('onHideDropdown', function(e, data) {
+// 		console.log('onHideDropdown', e.target.value, data);
+// 	})
+</script>
+
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/front/index.html">网站首页</a></li> <#list (cateList)! as
+				cate>
+				<li><a href="/front/list.html/${(cate.categoryId)!}">${(cate.categoryAlias)!}</a></li>
+				</#list>
+				<li><a href="/front/message.html">在线留言</a>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<div class="pics">
+			<ul>
+				<li><img
+					src="/front/picture/42d76eafa6495d9647a4fd245201f56c.jpg"></li>
+				<li><img
+					src="/front/picture/c9668d65657bc41b77f6834984538979.jpg"></li>
+				<li><img
+					src="/front/picture/13ec5c876bf437fd7e9e6b12b565a69c.jpg"></li>
+			</ul>
+		</div>
+		<div class="sleftbox">
+			<div class="newblogs">
+				<h2 class="hometitle">最新文章</h2>
+				<ul>
+					<#list (artiList)! as arti >
+					<li>
+
+						<h3 class="blogtitle">
+							<a href="/front/readmore.html/${(arti.id)!}/${(arti.pageView)!0}"
+								target="_blank">${(arti.articleTitle)!}</a>
+						</h3>
+						<div class="bloginfo">
+							<span class="blogpic"><a href="javascript:void(0)"
+								title="}"> <!-- 								<img src="${(arti.articleImg)!}" -->
+									<!-- 									alt="${(arti.articleImg)!}" /></a> --></span>
+							<p><#if arti.articleContent?length gt 200>
+								${arti.articleContent?substring(0,200)} ... <#else>
+								${(arti.articleContent)!} </#if></p>
+						</div>
+						<div class="autor">
+							<span class="lm f_l"><a
+								href="/front/list.html/${(arti.categoryId)!}"
+								title="${(arti.categoryAlias)!}" target="_blank"
+								class="classname">${(arti.categoryAlias)!}</a></span><span
+								class="dtime f_l">${(arti.articleTime?string("yyyy-MM-dd
+								HH:mm:ss"))!}</span><span class="viewnum f_l">浏览（<a
+								href="avascript:void(0)">${(arti.pageView)!0}</a>）
+							</span><span class="f_r"><a
+								href="/front/readmore.html/${(arti.id)!}/${(arti.pageView)!0}"
+								class="more">阅读原文>></a></span>
+						</div>
+					</li> </#list>
+				</ul>
+			</div>
+		</div>
+		<div class="srightbox">
+			<div class="aboutme">
+				<h2 class="ab_title">关于我</h2>
+				<div class="avatar">
+					<img src="/front/picture/b04.jpg" />
+				</div>
+				<div class="ab_con">
+					<p>网名：tenyers | 十年</p>
+					<p>职业：Java开发工程师</p>
+				</div>
+			</div>
+			<div class="search">
+				<form action="/front/index.html" method="post" name="searchform"
+					id="searchform">
+					<input name="name" id="baidu" class="input_text"
+						placeHolder="请输入关键字" style="color: rgb(153, 153, 153);"
+						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+						type="text"> <input name="Submit" class="input_submit"
+						value="搜索" type="submit">
+					<!-- <div class="input-group" style="width: 200px;">
+						<input type="text" class="form-control" id="baidu">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default dropdown-toggle"
+								data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							</ul>
+						</div>
+						<!-- /btn-group
+					</div> -->
+				</form>
+
+			</div>
+			<div class="paihang">
+				<h2 class="ab_title">
+					<a href="/">站长推荐</a>
+				</h2>
+				<ul>
+
+					<#list (recomList)! as recom >
+					<li><b><a href="/front/readmore.html/${(recom.id)!} "
+							target="_blank">${(recom.articleTitle)!}</a></b>
+						<p><#if recom.articleContent?length gt 90>
+							${(recom.articleContent?substring(0,90))!} ... <#else>
+							${(recom.articleContent)!} </#if></p></li> </#list>
+
+				</ul>
+				<div class="ad">
+					<img src="/front/picture/ad300x100.jpg">
+				</div>
+			</div>
+
+
+		</div>
+	</article>
+	<footer>
+		<p>
+			Design by <a href="http://www.XXX.com">个人博客</a> <a href="/">渝ICP备</a>
+		</p>
+	</footer>
+</body>
+</html>

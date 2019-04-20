@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.tenyears.mapper.CategoryInfoMapper">
+		<resultMap id="BaseResultMap" type="com.blog.tenyears.bean.CategoryInfo">
+				<id column="category_id" property="categoryId" jdbcType="INTEGER"/>
+				<result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+				<result column="category_alias" property="categoryAlias" jdbcType="VARCHAR"/>
+				<result column="category_desc" property="categoryDesc" jdbcType="VARCHAR"/>
+				<result column="category_mark" property="categoryMark" jdbcType="VARCHAR"/>
+		</resultMap>
+
+		<insert id="insert" parameterType="com.blog.tenyears.bean.CategoryInfo">
+				insert into category_info
+				(category_name, category_alias,
+				category_desc)
+				values
+				(#{categoryName,jdbcType=VARCHAR}, #{categoryAlias,jdbcType=VARCHAR},
+				#{categoryDesc,jdbcType=VARCHAR})
+		</insert>
+		<update id="updateByPrimaryKey" parameterType="com.blog.tenyears.bean.CategoryInfo">
+				update category_info
+				set
+				category_name = #{categoryName,jdbcType=VARCHAR},
+				category_alias =
+				#{categoryAlias,jdbcType=VARCHAR},
+				category_desc =
+				#{categoryDesc,jdbcType=VARCHAR}
+				where category_id =
+				#{categoryId,jdbcType=INTEGER}
+		</update>
+		<update id="deleteByPrimaryKey" parameterType="com.blog.tenyears.bean.CategoryInfo">
+				update category_info
+				set
+				category_mark = '-1'
+				where category_id =
+				#{categoryId,jdbcType=INTEGER}
+		</update>
+		<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+				parameterType="java.lang.Integer"
+		>
+				select category_id, category_name, category_alias, category_desc
+				from
+				category_info
+				where category_id = #{categoryId,jdbcType=INTEGER}
+		</select>
+		<select id="selectAll" resultMap="BaseResultMap">
+				select category_id, category_name,
+				category_alias, category_desc
+				from category_info
+		</select>
+		<select id="findCateCountByArticle" resultMap="BaseResultMap">
+				select a.category_id,
+				category_name, category_alias,category_mark, category_desc,b.count as
+				articleSum
+				from category_info a left join
+				(select category_id,count(category_id) as count
+				from article_info group by category_id ) b
+				on a.category_id=b.category_id where category_mark = '1'
+
+		</select>
+</mapper>

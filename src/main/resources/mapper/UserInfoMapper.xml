@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.tenyears.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.blog.tenyears.bean.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_mark" property="userMark" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.blog.tenyears.bean.UserInfo" >
+    insert into user_info ( user_name, user_phone, 
+      user_account, user_password, user_mark
+      )
+    values ( #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},1
+      )
+  </insert>
+<!--   <update id="updateByPrimaryKey" parameterType="com.blog.tenyears.bean.UserInfo" >
+    update user_info
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_mark = #{userMark,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update> -->
+ 
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select user_id, user_name, user_phone, user_account, user_password, user_mark
+    from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select user_id, user_name, user_phone, user_account, user_password, user_mark
+    from user_info where user_mark = '1'
+  </select>
+  <select id="countUser" resultType="int">
+    select count(*)
+    from user_info where  user_mark='1' 
+  </select>
+  <select id="findByPage" resultMap="BaseResultMap" >
+    select user_id, user_name, user_phone, user_account, user_password, user_mark
+    from user_info where user_mark='1' 
+    <if test="userName != null and userName!=''">
+    	<bind name="name" value="'%'+userName+'%'"/>
+    	and user_name like #{name}
+    </if>
+  </select>
+  <select id="doLogin" resultMap="BaseResultMap" >
+    select user_id, user_name, user_phone, user_account, user_password, user_mark
+    from user_info where user_mark='1' 
+	and user_account=#{userAccount} and user_password=#{userPassword}
+  </select>
+</mapper>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${(categoryInfo.categoryAlias)!}栏目</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/front/css/base.css" rel="stylesheet">
+<link href="/front/css/index.css" rel="stylesheet">
+</head>
+<body>
+
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/front/index.html">网站首页</a></li>
+				</li> <#list (cateList)! as
+				cate>
+				<li><a href="/front/list.html/${(cate.categoryId)!}">${(cate.categoryAlias)!}</a></li>
+				</#list>
+				<li><a href="/front/message.html">在线留言</a>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<div class="leftbox">
+			<div class="newblogs">
+				<h2 class="hometitle">
+					<span>★ 抱最大的希望，尽最大的努力，做最坏的打算。</span>${(categoryInfo.categoryAlias)!}
+				</h2>
+				<ul>
+
+				<#list (artiList)! as arti >
+					<li>
+
+						<h3 class="blogtitle">
+							<a href="/front/readmore.html/${(arti.id)!}"
+								target="_blank">${(arti.articleTitle)!}</a>
+						</h3>
+						<div class="bloginfo">
+							<span class="blogpic"><a href="javascript:void(0)" title="}"><img
+									src="${(arti.articleImg)!}" alt="${(arti.articleImg)!}" /></a></span>
+							<p><#if arti.articleContent?length gt 150>
+								${arti.articleContent?substring(0,150)} ... <#else>
+								${(arti.articleContent)!} </#if></p>
+						</div>
+						<div class="autor">
+							<span class="lm f_l"><a href="/front/list.html/${(arti.categoryId)!}"
+								title="${(arti.categoryAlias)!}" target="_blank"
+								class="classname">${(arti.categoryAlias)!}</a></span><span
+								class="dtime f_l">${(arti.articleTime?string("yyyy-MM-dd
+								HH:mm:ss"))!}</span><span class="viewnum f_l">浏览（<a href="avascript:void(0)">${(arti.pageView)!0}</a>）
+							</span><span class="f_r"><a
+								href="/front/readmore.html/${(arti.id)!}/${(arti.pageView)!0}" class="more">阅读原文>></a></span>
+						</div>
+					</li>
+				 </#list>
+				</ul>
+				<div class="pagelist">
+					<a title="Total record">&nbsp;<b>146</b>
+					</a>&nbsp;&nbsp;&nbsp;<b>1</b>&nbsp;<a href="/jstt/index_2.html">2</a>&nbsp;<a
+						href="/jstt/index_3.html">3</a>&nbsp;<a href="/jstt/index_4.html">4</a>&nbsp;<a
+						href="/jstt/index_5.html">5</a>&nbsp;<a href="/jstt/index_6.html">6</a>&nbsp;<a
+						href="/jstt/index_2.html">下一页</a>&nbsp;<a
+						href="/jstt/index_13.html">尾页</a>
+				</div>
+			</div>
+		</div>
+		<div class="rightbox">
+			<div class="search">
+				<form action="/e/search/index.php" method="post" name="searchform"
+					id="searchform">
+					<input name="keyboard" id="keyboard" class="input_text"
+						value="请输入关键字" style="color: rgb(153, 153, 153);"
+						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+						type="text"> <input name="show" value="title"
+						type="hidden"> <input name="tempid" value="1"
+						type="hidden"> <input name="tbname" value="news"
+						type="hidden"> <input name="Submit" class="input_submit"
+						value="搜索" type="submit">
+				</form>
+			</div>
+			<div class="paihang">
+				<h2 class="ab_title">
+					<a href="/">本栏推荐</a>
+				</h2>
+				<ul>
+
+					<#list (recomList)! as recom >
+					<li><b><a
+							href="/front/readmore.html/${(recom.id)!}/${(arti.pageView)!0} "
+							target="_blank">${(recom.articleTitle)!}</a></b>
+						<p><#if recom.articleContent?length gt 90>
+							${(recom.articleContent?substring(0,90))!} ... <#else>
+							${(recom.articleContent)!} </#if></p></li> </#list>
+
+				</ul>
+				<div class="ad">
+					<img src="/picture/ad300x100.jpg">
+				</div>
+			</div>
+
+
+		</div>
+	</article>
+	<footer>
+		<p>
+			Design by <a href="http://www.yangqq.com">杨青个人博客</a> <a href="/">蜀ICP备11002373号-1</a>
+		</p>
+	</footer>
+</body>
+</html>
+
+

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>在线留言</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/front/css/base.css" rel="stylesheet">
+<link href="/front/css/index.css" rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/front/index.html">网站首页</a></li>
+				 <#list (cateList)! as
+				cate>
+				<li><a href="/front/list.html/${(cate.categoryId)!}">${(cate.categoryAlias)!}</a></li>
+				</#list>
+				<li><a href="/front/message.html">在线留言</a></li>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<div class=" row container">
+			<h3>在线留言</h3>
+			<hr />
+			<form action="/front/message.html" method="post" class="form-horizontal">
+				<div class="form-group">
+
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="messageName"
+							placeholder="请输入姓名">
+					</div>
+				</div>
+				<div class="form-group">
+
+					<div class="col-sm-8">
+						<textarea rows="" cols="" class="form-control"
+							placeholder="请输入留言内容" name="messageContent"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-info">提 交</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<span style="color:red">${(param.flag)!}</span>
+		<#list (msgList)! as msg>
+			<blockquote>
+				<p>
+					${(msg.messageContent)!} <br /> <small>姓名：${(msg.messageName)!} 留言时间：${(msg.messageTime?string('yyyy-MM-dd HH:mm:ss'))!}
+						</small>
+				</p>
+			</blockquote>
+			</#list>
+		</div>
+	</article>
+	<footer>
+		<p>
+			Design by <a href="http://www.XXX.com">个人博客</a> <a href="/">渝ICP备</a>
+		</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${(article.articleTitle)!}</title>
+<meta name="keywords" content="帝国cms" />
+<meta name="description" content="帝国cms关键词和tags标签自动同步方法" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/front/css/base.css" rel="stylesheet">
+<link href="/front/css/index.css" rel="stylesheet">
+
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/front/index.html">网站首页</a></li>
+			<#list (cateList)! as
+				cate>
+				<li><a href="/front/list.html/${(cate.categoryId)!}">${(cate.categoryAlias)!}</a></li>
+				</#list>
+				<li><a href="/front/message.html">在线留言</a>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<div class="leftbox">
+			<div class="infos">
+				<div class="newsview">
+					<h2 class="intitle">
+						您现在的位置是：<a href="/front/index.html">首页</a>&nbsp;>&nbsp;<a
+							href="/front/list.html/${(article.categoryId)!}">${(article.categoryAlias)!}</a>&nbsp;>&nbsp;<a href="javascript:void(0)">${(article.articleTitle)!}</a>
+					</h2>
+					<h3 class="news_title">${(article.articleTitle)!}</h3>
+					<div class="news_author">
+						<span class="au01"></span><span class="au02">${(article.articleTime?string('yyyy-MM-dd HH:mm:ss'))!}</span>
+						<!-- 	<span class="au03">共<b><script
+									src=js/95340d73463e48a3ae4ff6f0815da9cf.js></script></b>人围观 -->
+						</span>
+					</div>
+					<div class="tags">
+						</a>
+					</div>
+					<div class="news_about">
+						<strong></strong>★ 活着本身就是一种幸运，年轻本身就是一种幸福
+					</div>
+					<div class="news_infos">
+						<p>${(article.articleContent)}</p>
+					</div>
+				</div>
+				<div class="share">分享：</div>
+			</div>
+			<div class="nextinfo">
+		<!-- 		<p>
+					上一篇：<a href='/jstt/web/2018-03-07/802.html'>野草云怎么样？香港CN2
+						VPS，美国CERA VPS，香港虚拟主机</a>
+				</p>
+				<p>
+					下一篇：<a href='/jstt/web/'>返回列表</a></a>
+				</p> -->
+			</div>
+
+		</div>
+		<div class="rightbox">
+			<div class="search">
+				<form action="/e/search/index.php" method="post" name="searchform"
+					id="searchform">
+					<input name="keyboard" id="keyboard" class="input_text"
+						value="请输入关键字" style="color: rgb(153, 153, 153);"
+						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+						type="text"> <input name="show" value="title"
+						type="hidden"> <input name="tempid" value="1"
+						type="hidden"> <input name="tbname" value="news"
+						type="hidden"> <input name="Submit" class="input_submit"
+						value="搜索" type="submit">
+				</form>
+			</div>
+
+			<div class="paihang">
+				<h2 class="ab_title">
+					<a href="/">站长推荐</a>
+				</h2>
+				<ul>
+
+					<#list (recomList)! as recom >
+					<li><b><a href="/front/readmore.html/${(recom.articleId)!}/${(arti.pageView)!0} " target="_blank">${(recom.articleTitle)!}</a></b>
+						<p><#if recom.articleContent?length gt 90>
+							${(recom.articleContent?substring(0,90))!} ... <#else>
+							${(recom.articleContent)!} </#if></p></li> </#list>
+
+				</ul>
+				<div class="ad">
+					<img src="picture/ad01.jpg">
+				</div>
+			</div>
+
+		</div>
+	</article>
+	<footer>
+		<p>
+			Design by <a href="http://www.XXX.com">个人博客</a> <a href="/">渝ICP备</a>
+		</p>
+	</footer>
+	<script src="/js/61a9ee23bfbe484da195456aea8b6f8b.js"></script>
+</body>
+</html>
