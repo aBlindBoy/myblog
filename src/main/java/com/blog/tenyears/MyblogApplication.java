@@ -1,6 +1,5 @@
 package com.blog.tenyears;
 
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,18 +7,21 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * Springboot 启动类
+ * 
+ * @author 23853
+ *
+ */
 @SpringBootApplication
 @ServletComponentScan
-//@EnableCaching
+// @EnableCaching
 @EnableScheduling
-@MapperScan(basePackages="com.blog.tenyears.mapper")
+@MapperScan(basePackages = "com.blog.tenyears.mapper")
 public class MyblogApplication {
-	
-	
+
 	public static void main(String[] args) {
-		
 		SpringApplication.run(MyblogApplication.class, args);
 	}
-	
-	
+
 }
